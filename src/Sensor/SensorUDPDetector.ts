@@ -30,7 +30,7 @@ export class SensorUDPDetector{
     }
 
     handleMessage(msg: Buffer, rinfo: dgram.RemoteInfo){
-        console.log(`${rinfo}: ${msg}`);
+        console.log(`${rinfo.address}: ${msg}`);
         SensorsManager.addSensor(msg, rinfo);
     }
 
