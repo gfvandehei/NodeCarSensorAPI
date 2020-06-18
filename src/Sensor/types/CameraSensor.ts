@@ -1,13 +1,14 @@
 import {Sensor} from "../Sensor";
 import {TCPClientObserver} from "../../common/TCPClientObserver";
-import {SensorTCPClient} from "../../common/SensorTCPClient";
-import * as b64 from 'base'
+import { SensorTCPClient } from "../../common/SensorTCPClient";
+import { Observer } from '../../common/Observer';
 import * as net from 'net';
 
 
 export class CameraSensor extends Sensor{
     private tcp_connection: SensorTCPClient | null = null;
     private connected: boolean = false;
+    private currentImage: Buffer | null = null;
 
     constructor(id: number){
         super(id);
@@ -29,9 +30,10 @@ export class CameraSensor extends Sensor{
     }
 
     recvMessage(message: Buffer){
-        //should be a base64 encoded jpg
-        console.log(message);
-
-        let b64_decode = new Buffer(m, "base64");
+      //should be a base64 encoded jpg
+      console.log(message);
+      let b64_decode = Buffer.from(message.toString(), 'base64');
+      this.currentImage = b64_decode;
+      this.updateState(this.currentImage);
     }
 }

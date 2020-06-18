@@ -1,4 +1,3 @@
-import * as struct from 'python-struct';
 import {Sensor} from "./Sensor";
 import {ClimateSensor} from "./types/ClimateSensor"
 import {CameraSensor} from "./types/CameraSensor";
@@ -18,7 +17,7 @@ class SensorManager{
 
     addSensor(sensorMessage: Buffer, address: any){
         try{
-            const sensorId: number = sensorMessage.readUInt32BE();
+            const sensorId: number = sensorMessage.readUInt32BE(0);
             const sensorType = sensorMessage.readUInt16BE(4);
             console.log(`${sensorId} ${sensorType}`);
             let sensor = this.sensorMap.get(sensorId);
@@ -41,8 +40,15 @@ class SensorManager{
             console.log(err);
             return;
         }
+  }
 
-    }
+  getSensorList() {
+    return [this.sensorMap.values];
+  }
+
+  getSensor(sensorId: number) {
+    return this.sensorMap.get(sensorId);
+  }
 }
 
 export const SensorsManager = new SensorManager();

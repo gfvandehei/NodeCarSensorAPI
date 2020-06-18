@@ -2,13 +2,12 @@ import * as dgram from "dgram";
 import { AddressInfo } from "net";
 import { SensorsManager } from './SensorManager';
 
-export class SensorUDPDetector{
-    private listPort: number;
+class SensorUDPDetector{
+    private listPort: number = 8888;
     private listener: dgram.Socket;
     private address: any;
 
-    constructor(listeningPort: number){
-        this.listPort = listeningPort;
+    constructor(){
         this.listener = dgram.createSocket('udp4');
         this.addEventListeners();
     }
@@ -34,8 +33,11 @@ export class SensorUDPDetector{
         SensorsManager.addSensor(msg, rinfo);
     }
 
-    public async start(){
-        await this.listener.bind(this.listPort);
-        this.listener.setBroadcast(true);
-    }
+  public async start(port: number) {
+    this.listPort = port;
+    await this.listener.bind(port);
+    this.listener.setBroadcast(true);
+  }
 }
+
+export const sensorListener = new SensorUDPDetector();
