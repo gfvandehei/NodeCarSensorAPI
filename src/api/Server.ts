@@ -10,6 +10,6 @@ let http = require("http").Server(app);
 export const io = require("socket.io")(http);
 
 http.listen(port);
-console.log(`SocketIO and HTTP listening on ${port}`)
+console.log(`SocketIO and HTTP listening on ${port}`);
 
 
