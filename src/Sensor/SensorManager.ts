@@ -19,7 +19,7 @@ class SensorManager{
         try{
             const sensorId: number = sensorMessage.readUInt32BE(0);
             const sensorType = sensorMessage.readUInt16BE(4);
-            console.log(`${sensorId} ${sensorType}`);
+            //console.log(`${sensorId} ${sensorType}`);
             let sensor = this.sensorMap.get(sensorId);
             if(sensor != null){
                 sensor.parseMessageData(sensorMessage.slice(6));
@@ -30,10 +30,10 @@ class SensorManager{
                     return;
                 }
                 let sensorClass = this.sensorTypeMap[sensorType];
-                console.log(sensorClass);
+                //console.log(sensorClass);
                 let newSensor = new sensorClass(sensorId);
                 this.sensorMap.set(sensorId, newSensor);
-                console.log(`Created new sensor id:${sensorId} of type:${sensorType}`);
+                console.log(`A new sensor has been detected id:${sensorId} of type:${sensorClass.name}`);
             }
         }
         catch(err){

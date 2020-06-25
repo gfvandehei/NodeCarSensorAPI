@@ -8,7 +8,7 @@ import * as net from 'net';
 export class CameraSensor extends Sensor{
     private tcp_connection: SensorTCPClient | null = null;
     private connected: boolean = false;
-    private currentImage: Buffer | null = null;
+    private currentImage: String | null = null;
 
     constructor(id: number){
         super(id);
@@ -16,7 +16,7 @@ export class CameraSensor extends Sensor{
 
     async parseMessageData(data: Buffer){
         let datajson = JSON.parse(data.toString());
-        console.log(datajson);
+        //console.log(datajson);
         let port = datajson['data_port'];
         let address = datajson['data_addr'];
         if(!this.connected){
@@ -30,10 +30,10 @@ export class CameraSensor extends Sensor{
     }
 
     recvMessage(message: Buffer){
-      //should be a base64 encoded jpg
-      console.log(message);
-      let b64_decode = Buffer.from(message.toString(), 'base64');
-      this.currentImage = b64_decode;
-      this.updateState(this.currentImage);
+      //message should be a base64 encoded jpg
+      this.currentImage = message.toString();
+      this.updateState(message.toString());
+      //let b64_decode = Buffer.from(message.toString(), 'base64');
+      //this.updateState(this.currentImage);
     }
 }

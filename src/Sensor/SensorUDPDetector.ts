@@ -29,7 +29,7 @@ class SensorUDPDetector{
     }
 
     handleMessage(msg: Buffer, rinfo: dgram.RemoteInfo){
-        console.log(`${rinfo.address}: ${msg}`);
+        //console.log(`${rinfo.address}: ${msg}`);
         SensorsManager.addSensor(msg, rinfo);
     }
 

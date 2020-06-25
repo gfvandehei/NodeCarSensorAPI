@@ -5,7 +5,7 @@ import { SocketIOClient } from "./Client";
 let clients = new Map<String, SocketIOClient>();
 
 io.on("connection", (socket: sio.Socket) => {
-  console.log(`A new client connected ${socket.handshake.address}`);
+  console.log(`Client connection established: SocketIO API ${socket.handshake.address}`);
   let newSocketIOClient = new SocketIOClient(socket);
   clients.set(socket.handshake.address, newSocketIOClient);
 });

@@ -11,6 +11,7 @@ export class SocketIOClient{
 
   constructor(socket: any) {
     this.socket = socket;
+    this.addEventListeners();
   }
 
   addEventListeners() {
@@ -48,7 +49,8 @@ export class SocketIOClient{
     if (sensorObject) {
       let newObserver = new SensorObserver();
       newObserver.update = (state: any) => {
-        this.socket.emit(`sensor_state`, sensorId, state);
+        //console.log(state);
+        this.socket.emit(`sensor_state`, {id: sensorId, data: state});
       }
       sensorObject.attach(newObserver);
     }

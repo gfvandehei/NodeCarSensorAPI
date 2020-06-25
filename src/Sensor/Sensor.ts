@@ -14,7 +14,8 @@ export class Sensor{
   }
 
   async parseMessageData(data: Buffer){
-      console.log(data);
+      //console.log(data);
+      return;
   }
 
   async updateState(newstate: any) {
