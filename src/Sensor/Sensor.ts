@@ -31,6 +31,6 @@ export class Sensor{
   propagate() {
     this.observers.forEach((observer: Observer) => {
       observer.update(this.state);
-    })
+    });
   }
 }

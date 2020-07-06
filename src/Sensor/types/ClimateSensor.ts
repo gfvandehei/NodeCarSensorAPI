@@ -11,5 +11,7 @@ export class ClimateSensor extends Sensor{
         this.temperature = datajson.data['temp'];
         this.humidity = datajson.data['humidity'];
         this.pressure = datajson.data['pressure'];
+
+        this.updateState(datajson);
     }
 }
