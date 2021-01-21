@@ -8,7 +8,7 @@
     "@types/socket.io": "^2.1.8",
     "electron": "^9.0.3",
     "express": "^4.17.1",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   },
   "devDependencies": {},
   "scripts": {
